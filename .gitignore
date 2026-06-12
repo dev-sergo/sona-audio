@@ -1,0 +1,18 @@
+# env
+.env
+
+# runtime data
+data/
+
+# python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,8 @@
+# GPU box — model inference server (requires CUDA)
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.12
+httpx>=0.27.0
+pydantic-settings>=2.0.0
+faster-whisper>=1.0.0
+demucs>=4.0.1
