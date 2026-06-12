@@ -29,5 +29,5 @@ gpu-setup:
 	bash setup_gpu.sh
 
 gpu-start:
-	source ~/venvs/alf-audio/bin/activate && \
-	python -m uvicorn model_server.main:app --host 0.0.0.0 --port 8001
+	bash -c "source ~/venvs/alf-audio/bin/activate && \
+	python -m uvicorn model_server.main:app --host 0.0.0.0 --port 8001"
