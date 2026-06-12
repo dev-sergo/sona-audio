@@ -1,4 +1,4 @@
-# alf-audio-studio — Claude Context
+# sona-audio — Claude Context
 
 Personal AI audio studio. Heavy models run on a GPU box (RTX 3090), Telegram bot and clients connect over HTTP.
 

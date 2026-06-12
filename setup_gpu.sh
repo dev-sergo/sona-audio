@@ -2,9 +2,9 @@
 set -euo pipefail
 
 VENV="$HOME/venvs/alf-audio"
-PROJECT="$HOME/alf-audio-studio"
+PROJECT="$HOME/sona-audio"
 
-echo "=== alf-audio GPU box setup ==="
+echo "=== sona-audio GPU box setup ==="
 
 # 1. venv
 if [ ! -d "$VENV" ]; then

@@ -44,7 +44,7 @@
 ## Project Structure
 
 ```
-alf-audio-studio/
+sona-audio/
 ├── model_server/               ← runs on GPU box
 │   ├── main.py                 # FastAPI: /whisper /demucs /acestep /health
 │   └── config.py               # model paths, device settings
@@ -113,14 +113,14 @@ Whisper + Demucs + llama-swap ≈ 12 GB simultaneous → fits in 24 GB.
 
 ### GPU box
 ```bash
-cd ~/alf-audio-studio
+cd ~/sona-audio
 source ~/venvs/alf-audio/bin/activate
 python -m uvicorn model_server.main:app --host 0.0.0.0 --port 8001
 ```
 
 ### Mac
 ```bash
-cd /Users/admin/work/alf-audio-studio
+cd /Users/admin/work/sona-audio
 # terminal 1 — API server
 python -m uvicorn server.main:app --host 0.0.0.0 --port 8000
 # terminal 2 — Telegram bot
