@@ -6,9 +6,9 @@ Living document. Update at the start and end of every dev session.
 
 ## Current Status
 
-**Phase**: 1 — Code complete; tests + CI + Docker in place; ready for git init & GPU deploy
-**Date**: 2026-06-12
-**Next action**: `git init` & first commit → transfer code to GPU box → install deps → run model_server → test /health
+**Phase**: 2 — Core stack deployed and tested end-to-end; ACE-Step generation is next
+**Date**: 2026-06-17
+**Next action**: Implement ACE-Step music generation (study ComfyUI node source → wire up model_server endpoint)
 
 ---
 
@@ -18,23 +18,44 @@ Living document. Update at the start and end of every dev session.
 - [x] GPU visible, CUDA 12.1
 - [x] Python 3.10.6 (pyenv), torch 2.5.1+cu121
 - [x] ACE-Step weights present at `~/Documents/ComfyUI/models/ace-step/`
-- [x] llama-swap running at :8080 (qwen3-32k model confirmed)
-- [ ] venv `~/venvs/alf-audio` created
-- [ ] faster-whisper installed
-- [ ] demucs installed
+- [x] llama-swap running at :8080 (gemma-4-26b-a4b-it-mxfp4-moe used for translation/notes)
+- [x] venv `~/venvs/alf-audio` created
+- [x] faster-whisper installed and working
+- [x] demucs installed and working (ffmpeg added for MP3 support)
 - [ ] ACE-Step Python package installed and verified
-- [ ] FastAPI server runs and /health responds
+- [x] FastAPI server runs and /health responds
 
 ### Mac (development)
 - [x] Project dir: `/Users/admin/work/sona-audio`
-- [x] Scaffold complete (34 files)
+- [x] Scaffold complete, repo pushed to GitHub
+- [x] .env configured (MODEL_SERVER_URL, LLM_URL, LLM_MODEL)
 - [ ] Bot dependencies installed
-- [ ] .env files configured
 - [ ] Bot connects to API and responds to /start
 
 ---
 
 ## Iteration Log
+
+### 2026-06-16/17 — Session 4
+**Done:**
+- Deployed model_server on GPU box (Whisper + Demucs loaded, /health ✅)
+- Fixed Makefile gpu-start (`source` → `bash -c "source ..."`)
+- Identified working LLM: gemma-4-26b-a4b-it-mxfp4-moe (qwen3-32k not available)
+- Fixed LLM service for thinking models: system prompt + max_tokens=4000 + reasoning_content fallback
+- Fixed /notes curl example (form-data, not JSON)
+- Installed ffmpeg on GPU box (required by torchaudio for MP3)
+- End-to-end test results: /translate ✅ /notes ✅ /transcribe ✅ /separate ✅
+
+**Blockers hit and resolved:**
+- llama-swap model OOM → use MoE model with small active params
+- torchaudio can't decode MP3 → install ffmpeg
+- Thinking model returns empty content → system prompt + reasoning_content fallback
+- model_server OOM on restart → stop llama-swap first, then start model_server
+
+**Still open:**
+- ACE-Step music generation (stub, returns 501)
+- Telegram bot not configured (no token yet)
+- model_server starts manually — no systemd service yet
 
 ### 2026-06-12 — Session 3
 **Done:**
