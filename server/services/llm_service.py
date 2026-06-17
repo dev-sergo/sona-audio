@@ -14,7 +14,7 @@ async def translate(text: str, target_lang: str) -> dict:
         f"Translate the following text to {lang_name}. "
         f"Output only the translation, nothing else.\n\n{text}"
     )
-    content = await _chat(prompt, max_tokens=2000, temperature=0.1)
+    content = await _chat(prompt, max_tokens=4000, temperature=0.1)
     return {"text": content.strip(), "target_lang": target_lang}
 
 
@@ -25,7 +25,7 @@ async def summarize_note(text: str) -> dict:
         "Respond with valid JSON only, no extra text.\n\n"
         f"Text: {text}"
     )
-    content = await _chat(prompt, max_tokens=500, temperature=0.3)
+    content = await _chat(prompt, max_tokens=4000, temperature=0.3)
     match = re.search(r"\{.*\}", content, re.DOTALL)
     if match:
         try:
@@ -41,10 +41,17 @@ async def _chat(prompt: str, max_tokens: int = 1000, temperature: float = 0.3) -
             f"{settings.llm_url}/v1/chat/completions",
             json={
                 "model": settings.llm_model,
-                "messages": [{"role": "user", "content": prompt}],
+                "messages": [
+                    {"role": "system", "content": "You are a helpful assistant. Respond directly and concisely. Do not explain your reasoning."},
+                    {"role": "user", "content": prompt},
+                ],
                 "temperature": temperature,
                 "max_tokens": max_tokens,
             },
         )
         resp.raise_for_status()
-    return resp.json()["choices"][0]["message"]["content"]
+    message = resp.json()["choices"][0]["message"]
+    content = message.get("content", "").strip()
+    if not content:
+        content = message.get("reasoning_content", "").strip()
+    return content

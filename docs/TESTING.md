@@ -36,8 +36,7 @@ curl -X POST http://localhost:8000/translate \
 ### 4. Notes
 ```bash
 curl -X POST http://localhost:8000/notes \
-  -H "Content-Type: application/json" \
-  -d '{"text":"track idea: trap, 90 bpm"}'
+  -F "text=track idea: trap, 90 bpm"
 curl http://localhost:8000/notes
 curl "http://localhost:8000/notes?search=trap"
 ```
