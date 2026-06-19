@@ -19,12 +19,11 @@ async def _handle_separate(job_id: str, payload: dict) -> dict:
 
 async def _handle_generate(job_id: str, payload: dict) -> dict:
     from server.services.acestep_service import generate as acestep_generate
-    from server.services.llm_service import translate as llm_translate
+    from server.services.translate_service import translate_ru_en
 
     lyrics = payload["lyrics"]
     if payload.get("language") == "ru":
-        result = await llm_translate(lyrics, "en")
-        lyrics = result["text"]
+        lyrics = await translate_ru_en(lyrics)
 
     return await acestep_generate(
         lyrics=lyrics,

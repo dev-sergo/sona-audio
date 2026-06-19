@@ -36,7 +36,7 @@ async def summarize_note(text: str) -> dict:
 
 
 async def _chat(prompt: str, max_tokens: int = 1000, temperature: float = 0.3) -> str:
-    async with httpx.AsyncClient(timeout=60.0) as client:
+    async with httpx.AsyncClient(timeout=300.0) as client:
         resp = await client.post(
             f"{settings.llm_url}/v1/chat/completions",
             json={

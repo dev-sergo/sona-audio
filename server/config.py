@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     # GPU box model server
     model_server_url: str = "http://localhost:8001"
 
+    # ACE-Step API server on GPU box
+    acestep_url: str = "http://localhost:8002"
+
     # LLM (llama-swap on GPU box) — for translation + note summarization
     llm_url: str = "http://localhost:8080"
     llm_model: str = "qwen3-32k"
