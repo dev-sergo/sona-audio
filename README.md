@@ -24,10 +24,36 @@ Heavy models run on a GPU box (RTX 3090); logic and the Telegram bot run on a Ma
 | Speech transcription | faster-whisper large-v3 | ✅ ready |
 | Stem separation | demucs htdemucs | ✅ ready |
 | Smart notes | qwen3 via llama-swap | ✅ ready |
-| RU ↔ EN translation | qwen3 via llama-swap | ✅ ready |
+| RU → EN translation | Helsinki-NLP opus-mt (CPU) | ✅ ready |
 | YouTube / SoundCloud download | yt-dlp | ✅ ready |
-| Music generation | ACE-Step-1.5 | 🚧 stub (501) |
+| Music generation | ACE-Step-1.5 | ✅ ready |
 | TTS with your own voice | XTTS v2 | 📋 planned |
+
+---
+
+## 🎵 Demo — generated music
+
+All tracks below were generated end-to-end by the `/generate` endpoint (ACE-Step-1.5,
+~10 s each on the RTX 3090). Click **download** to grab the `.mp3`.
+
+| Genre | Waveform | |
+|---|---|---|
+| **Drum & Bass** · 174 bpm | ![dnb](result-test/waveforms/dnb.png) | [⬇ download](result-test/dnb.mp3) |
+| **Deep House** · 124 bpm | ![house](result-test/waveforms/house.png) | [⬇ download](result-test/house.mp3) |
+| **Alt Rock** · 140 bpm | ![rock](result-test/waveforms/rock.png) | [⬇ download](result-test/rock.mp3) |
+| **Lo-fi Hip Hop** · 75 bpm | ![lofi](result-test/waveforms/lofi.png) | [⬇ download](result-test/lofi.mp3) |
+| **Boom Bap Rap** · 90 bpm | ![rap](result-test/waveforms/rap.png) | [⬇ download](result-test/rap.mp3) |
+| **Reggae** · 80 bpm | ![reggae](result-test/waveforms/reggae.png) | [⬇ download](result-test/reggae.mp3) |
+| **Heavy Metal** · 160 bpm | ![metal](result-test/waveforms/metal.png) | [⬇ download](result-test/metal.mp3) |
+| **Smooth Jazz** · 90 bpm | ![jazz](result-test/waveforms/jazz.png) | [⬇ download](result-test/jazz.mp3) |
+| **Country** · 110 bpm | ![country](result-test/waveforms/country.png) | [⬇ download](result-test/country.mp3) |
+| **Funk** · 110 bpm | ![funk](result-test/waveforms/funk.png) | [⬇ download](result-test/funk.mp3) |
+| **Disco** · 120 bpm | ![disco](result-test/waveforms/disco.png) | [⬇ download](result-test/disco.mp3) |
+| **Ambient** · 70 bpm | ![ambient](result-test/waveforms/ambient.png) | [⬇ download](result-test/ambient.mp3) |
+| **Blues** · 85 bpm | ![blues](result-test/waveforms/blues.png) | [⬇ download](result-test/blues.mp3) |
+
+> GitHub doesn't play inline audio for files committed to a repo — the links above
+> download the `.mp3`. For inline players, attach files via the GitHub web UI.
 
 ---
 
@@ -60,7 +86,7 @@ All numbers measured on the GPU box. Lower is better.
 | Whisper large-v3 transcription | 60 s voice (OGG) | ~4 s |
 | Demucs htdemucs stem split | 3 min track (MP3) | ~45 s |
 | qwen3-32k translation | ~200 tokens | ~2 s |
-| ACE-Step music generation | 30 s, 4 stems | TBD |
+| ACE-Step music generation | 30–45 s track, turbo | ~10 s |
 
 > Benchmark conditions and methodology: [docs/BENCHMARKS.md](docs/BENCHMARKS.md) _(coming soon)_
 

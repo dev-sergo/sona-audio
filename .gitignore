@@ -16,3 +16,6 @@ venv/
 .idea/
 .vscode/
 *.swp
+
+# audio source files — too heavy for git; only MP3 demos + PNG waveforms are tracked
+*.wav
