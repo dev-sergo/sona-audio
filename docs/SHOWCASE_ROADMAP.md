@@ -76,8 +76,8 @@ session that changes the project's identity.
 
 Make the demos legible on a platform that can't play them inline.
 
-- [ ] Generate **spectrograms** alongside the existing waveforms (librosa + matplotlib) — they show frequency content, more informative than amplitude alone. Commit small PNGs next to `result-test/waveforms/`.
-- [ ] Add a **generation-params table** per demo track (lyrics, style, seed, duration) for reproducibility — once S1 makes them reproducible.
+- [x] Generate **spectrograms** alongside the existing waveforms — they show frequency content, more informative than amplitude alone. Committed as PNGs under `result-test/spectrograms/`, wired into the README demo table. *(Used ffmpeg `showspectrumpic` via [`scripts/make_spectrograms.sh`](../scripts/make_spectrograms.sh) instead of librosa — the project installs nothing natively on the Mac, and ffmpeg is already a dep.)*
+- [ ] Add a **generation-params table** per demo track (lyrics, style, seed, duration) for reproducibility — once S1 makes them reproducible. *(blocked on S1)*
 - [ ] (optional) A minimal inline player: Gradio UI bolted onto FastAPI, or a GitHub Pages page with `<audio>` tags, linked from the README.
 - [ ] (optional) A short A/B section: same lyrics, different styles — shows controllability.
 - [ ] (optional) Add a generated-content license note (e.g. CC0) for the demo tracks.

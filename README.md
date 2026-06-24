@@ -31,22 +31,26 @@ All tracks below were generated with **ACE-Step-1.5** on the RTX 3090 (~10 s eac
 They are produced via the ACE-Step ComfyUI node today; wiring this into the in-repo
 `/generate` endpoint is in progress (see [status](#status)). Click **download** to grab the `.mp3`.
 
-| Genre | Waveform | |
-|---|---|---|
-| **Drum & Bass** · 174 bpm | ![dnb](result-test/waveforms/dnb.png) | [⬇ download](result-test/dnb.mp3) |
-| **Deep House** · 124 bpm | ![house](result-test/waveforms/house.png) | [⬇ download](result-test/house.mp3) |
-| **Alt Rock** · 140 bpm | ![rock](result-test/waveforms/rock.png) | [⬇ download](result-test/rock.mp3) |
-| **Lo-fi Hip Hop** · 75 bpm | ![lofi](result-test/waveforms/lofi.png) | [⬇ download](result-test/lofi.mp3) |
-| **Boom Bap Rap** · 90 bpm | ![rap](result-test/waveforms/rap.png) | [⬇ download](result-test/rap.mp3) |
-| **Reggae** · 80 bpm | ![reggae](result-test/waveforms/reggae.png) | [⬇ download](result-test/reggae.mp3) |
-| **Heavy Metal** · 160 bpm | ![metal](result-test/waveforms/metal.png) | [⬇ download](result-test/metal.mp3) |
-| **Smooth Jazz** · 90 bpm | ![jazz](result-test/waveforms/jazz.png) | [⬇ download](result-test/jazz.mp3) |
-| **Country** · 110 bpm | ![country](result-test/waveforms/country.png) | [⬇ download](result-test/country.mp3) |
-| **Funk** · 110 bpm | ![funk](result-test/waveforms/funk.png) | [⬇ download](result-test/funk.mp3) |
-| **Disco** · 120 bpm | ![disco](result-test/waveforms/disco.png) | [⬇ download](result-test/disco.mp3) |
-| **Ambient** · 70 bpm | ![ambient](result-test/waveforms/ambient.png) | [⬇ download](result-test/ambient.mp3) |
-| **Blues** · 85 bpm | ![blues](result-test/waveforms/blues.png) | [⬇ download](result-test/blues.mp3) |
+| Genre | Waveform | Spectrogram | |
+|---|---|---|---|
+| **Drum & Bass** · 174 bpm | ![dnb wave](result-test/waveforms/dnb.png) | ![dnb spectrogram](result-test/spectrograms/dnb.png) | [⬇ mp3](result-test/dnb.mp3) |
+| **Deep House** · 124 bpm | ![house wave](result-test/waveforms/house.png) | ![house spectrogram](result-test/spectrograms/house.png) | [⬇ mp3](result-test/house.mp3) |
+| **Alt Rock** · 140 bpm | ![rock wave](result-test/waveforms/rock.png) | ![rock spectrogram](result-test/spectrograms/rock.png) | [⬇ mp3](result-test/rock.mp3) |
+| **Lo-fi Hip Hop** · 75 bpm | ![lofi wave](result-test/waveforms/lofi.png) | ![lofi spectrogram](result-test/spectrograms/lofi.png) | [⬇ mp3](result-test/lofi.mp3) |
+| **Boom Bap Rap** · 90 bpm | ![rap wave](result-test/waveforms/rap.png) | ![rap spectrogram](result-test/spectrograms/rap.png) | [⬇ mp3](result-test/rap.mp3) |
+| **Reggae** · 80 bpm | ![reggae wave](result-test/waveforms/reggae.png) | ![reggae spectrogram](result-test/spectrograms/reggae.png) | [⬇ mp3](result-test/reggae.mp3) |
+| **Heavy Metal** · 160 bpm | ![metal wave](result-test/waveforms/metal.png) | ![metal spectrogram](result-test/spectrograms/metal.png) | [⬇ mp3](result-test/metal.mp3) |
+| **Smooth Jazz** · 90 bpm | ![jazz wave](result-test/waveforms/jazz.png) | ![jazz spectrogram](result-test/spectrograms/jazz.png) | [⬇ mp3](result-test/jazz.mp3) |
+| **Country** · 110 bpm | ![country wave](result-test/waveforms/country.png) | ![country spectrogram](result-test/spectrograms/country.png) | [⬇ mp3](result-test/country.mp3) |
+| **Funk** · 110 bpm | ![funk wave](result-test/waveforms/funk.png) | ![funk spectrogram](result-test/spectrograms/funk.png) | [⬇ mp3](result-test/funk.mp3) |
+| **Disco** · 120 bpm | ![disco wave](result-test/waveforms/disco.png) | ![disco spectrogram](result-test/spectrograms/disco.png) | [⬇ mp3](result-test/disco.mp3) |
+| **Ambient** · 70 bpm | ![ambient wave](result-test/waveforms/ambient.png) | ![ambient spectrogram](result-test/spectrograms/ambient.png) | [⬇ mp3](result-test/ambient.mp3) |
+| **Blues** · 85 bpm | ![blues wave](result-test/waveforms/blues.png) | ![blues spectrogram](result-test/spectrograms/blues.png) | [⬇ mp3](result-test/blues.mp3) |
 
+> Waveform = amplitude over time; **spectrogram** = frequency content over time
+> (log-frequency, dBFS, viridis). Spectrograms are generated from the `.mp3`s with
+> [`scripts/make_spectrograms.sh`](scripts/make_spectrograms.sh) (ffmpeg).
+>
 > GitHub doesn't play inline audio for files committed to a repo — the links above
 > download the `.mp3`. For inline players, attach files via the GitHub web UI.
 
