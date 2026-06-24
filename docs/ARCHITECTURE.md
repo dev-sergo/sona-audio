@@ -20,7 +20,7 @@
 │  model_server/   FastAPI :8001      │
 │    POST /whisper  → faster-whisper  │
 │    POST /demucs   → demucs          │
-│    POST /acestep  → ACE-Step (TODO) │
+│    POST /acestep  → ACE-Step (WIP)  │
 │    GET  /health                     │
 │                                     │
 │  llama-swap      :8080 (existing)   │
@@ -104,7 +104,7 @@ sona-audio/
 |---|---|---|
 | faster-whisper large-v3 | ~3 GB | loaded at startup |
 | demucs htdemucs | ~1 GB | loaded at startup |
-| ACE-Step (TODO) | ~8-10 GB | lazy load |
+| ACE-Step (API WIP) | ~8-10 GB | lazy load (weights present; `/acestep` returns 501 until wired up) |
 | llama-swap (qwen3) | ~6-8 GB | managed separately |
 
 Whisper + Demucs + llama-swap ≈ 12 GB simultaneous → fits in 24 GB.
@@ -120,7 +120,7 @@ python -m uvicorn model_server.main:app --host 0.0.0.0 --port 8001
 
 ### Mac
 ```bash
-cd /Users/admin/work/sona-audio
+cd ~/work/sona-audio
 # terminal 1 — API server
 python -m uvicorn server.main:app --host 0.0.0.0 --port 8000
 # terminal 2 — Telegram bot

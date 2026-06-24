@@ -11,8 +11,13 @@ Convert any audio to text. Primary use: Telegram voice messages.
 - Model: faster-whisper large-v3 (CUDA)
 - Bot command: send voice message or audio file → get text back
 
-### 2. Music Generation
+### 2. Music Generation 🧪 *(WIP — API not wired up yet)*
 Text + style → full song with vocals.
+
+> **Current state:** the ACE-Step **model** is proven — the 13 demo tracks in the README
+> are its real output, produced via the ComfyUI node. The **in-repo service integration**
+> is not done: `/generate` → `model_server:/acestep` currently returns 501. The spec below
+> is the target design. See [README → Status](../README.md#status).
 
 - Input: lyrics (text), style/genre tags (e.g. "hip-hop, russian, dark beat"), duration
 - Language: EN or RU. If RU detected → auto-translate to EN before generation

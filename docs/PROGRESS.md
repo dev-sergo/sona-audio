@@ -26,7 +26,7 @@ Living document. Update at the start and end of every dev session.
 - [x] FastAPI server runs and /health responds
 
 ### Mac (development)
-- [x] Project dir: `/Users/admin/work/sona-audio`
+- [x] Project dir: `~/work/sona-audio`
 - [x] Scaffold complete, repo pushed to GitHub
 - [x] .env configured (MODEL_SERVER_URL, LLM_URL, LLM_MODEL)
 - [ ] Bot dependencies installed
@@ -59,7 +59,7 @@ Living document. Update at the start and end of every dev session.
 
 ### 2026-06-12 — Session 3
 **Done:**
-- Renamed project to `sona`; dir is `/Users/admin/work/sona-audio`
+- Renamed project to `sona`; dir is `~/work/sona-audio`
 - Added test suite (`tests/`: health, jobs, notes, transcribe, translate) + `pytest.ini` + `conftest.py`
 - Added GitHub Actions CI (`.github/workflows/ci.yml`) — runs pytest on every push/PR
 - Added Docker: `Dockerfile.server`, `Dockerfile.bot`, `docker-compose.yml`, `Makefile`

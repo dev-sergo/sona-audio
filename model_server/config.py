@@ -9,7 +9,9 @@ class ModelServerSettings(BaseSettings):
     whisper_device: str = "cuda"
     whisper_compute_type: str = "float16"
 
-    acestep_model_path: str = "/home/serbio/Documents/ComfyUI/models/ace-step"
+    # Required for music generation. Set via ACESTEP_MODEL_PATH env / model_server/.env.
+    # Use an absolute path — there is no ~ expansion here.
+    acestep_model_path: str = ""
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

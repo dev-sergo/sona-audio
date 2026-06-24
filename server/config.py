@@ -16,7 +16,9 @@ class Settings(BaseSettings):
 
     # LLM (llama-swap on GPU box) — for translation + note summarization
     llm_url: str = "http://localhost:8080"
-    llm_model: str = "qwen3-32k"
+    # Overridden via LLM_MODEL env (see .env.example). qwen3-32k was the original
+    # pick but isn't available on the box; gemma MoE is what actually runs.
+    llm_model: str = "gemma-4-26b-a4b-it-mxfp4-moe-ctx-32k-q8-0-kv-t07"
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

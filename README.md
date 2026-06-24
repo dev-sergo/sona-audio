@@ -1,11 +1,11 @@
 ![sona-audio](logo.svg)
 
-**Personal AI audio studio and model benchmark bench.**  
+**Personal AI audio studio and model benchmark suite.**  
 Transcription · Stem separation · Smart notes · Translation · Music generation.  
 Heavy models run on a GPU box (RTX 3090); logic and the Telegram bot run on a Mac.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![CI](https://github.com/dev-sergo/sona-audio-/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-sergo/sona-audio-/actions)
+[![CI](https://github.com/dev-sergo/sona-audio/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-sergo/sona-audio/actions)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://opensource.org/)
 
@@ -100,7 +100,7 @@ All numbers measured on the GPU box. Lower is better.
 
 <sub>*measured via the ACE-Step ComfyUI node; the in-repo `/generate` endpoint that wraps it is still being wired up.</sub>
 
-> Benchmark conditions and methodology: [docs/BENCHMARKS.md](docs/BENCHMARKS.md) _(coming soon)_
+> Benchmark conditions and methodology will be documented separately once the generation timing is measured through the in-repo endpoint.
 
 ---
 
@@ -108,7 +108,7 @@ All numbers measured on the GPU box. Lower is better.
 
 ### GPU box (one-time setup)
 ```bash
-git clone https://github.com/dev-sergo/sona-audio-.git ~/sona-audio
+git clone https://github.com/dev-sergo/sona-audio.git ~/sona-audio
 cd ~/sona-audio
 bash setup_gpu.sh          # creates venv, installs faster-whisper + demucs
 make gpu-start             # starts model_server on :8001
@@ -116,7 +116,7 @@ make gpu-start             # starts model_server on :8001
 
 ### Mac
 ```bash
-git clone https://github.com/dev-sergo/sona-audio-.git
+git clone https://github.com/dev-sergo/sona-audio.git
 cd sona-audio
 cp .env.example .env       # set MODEL_SERVER_URL and LLM_URL
 make up                    # docker compose up -d  (server + bot)

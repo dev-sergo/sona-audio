@@ -1,6 +1,7 @@
 # API Reference
 
-Base URL: `http://<gpu-box>:8000`
+Base URL: `http://<mac-host>:8000` — the API server runs on the Mac; it delegates
+inference to the GPU box over HTTP (see [ARCHITECTURE.md](ARCHITECTURE.md)).
 
 All endpoints accept and return JSON unless noted (file uploads use multipart/form-data).
 Async endpoints return `job_id` immediately. Poll `GET /jobs/{id}` for result.
@@ -66,6 +67,12 @@ Poll `GET /jobs/sep_a1b2c3` for result:
 ## POST /generate
 
 Generate a song from lyrics + style.
+
+> ⚠️ **Status: WIP.** This endpoint currently returns **501 Not Implemented** — the
+> downstream `model_server:/acestep` is still a stub. The demo tracks in the README were
+> produced via the ACE-Step ComfyUI node, not this endpoint. See
+> [README → Status](../README.md#status). The request/response shape below is the target
+> contract once the integration lands.
 
 **Request** — JSON
 ```json

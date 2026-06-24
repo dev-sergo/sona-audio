@@ -25,9 +25,12 @@ clean:
 	rm -rf data/
 
 # ── GPU box (run there over ssh) ─────────────────────────────────────────────
+# Override the venv location if yours differs: make gpu-start VENV=~/venvs/myenv
+VENV ?= ~/venvs/alf-audio
+
 gpu-setup:
 	bash setup_gpu.sh
 
 gpu-start:
-	bash -c "source ~/venvs/alf-audio/bin/activate && \
+	bash -c "source $(VENV)/bin/activate && \
 	python -m uvicorn model_server.main:app --host 0.0.0.0 --port 8001"

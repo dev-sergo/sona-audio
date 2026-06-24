@@ -16,7 +16,7 @@ You do **not** need the GPU box to work on the server logic or bot.
 The test suite mocks all model calls and runs in a plain Python container.
 
 ```bash
-git clone https://github.com/dev-sergo/sona-audio-.git
+git clone https://github.com/dev-sergo/sona-audio.git
 cd sona-audio
 cp .env.example .env
 make test          # verify everything passes before you start
@@ -45,7 +45,8 @@ Open a GitHub issue. Include:
 ## Benchmarks
 
 If you run the project on different hardware, consider sharing your numbers by
-opening an issue or PR that adds a row to [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+opening an issue or PR with the relevant timings. A dedicated benchmark methodology
+doc is planned (see the README benchmark section).
 
 ## License
 
