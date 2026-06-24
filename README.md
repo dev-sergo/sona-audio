@@ -1,10 +1,4 @@
-```
-███████  ██████  ███    ██  █████
-██      ██    ██ ████   ██ ██   ██
-███████ ██    ██ ██ ██  ██ ███████
-     ██ ██    ██ ██  ██ ██ ██   ██
-███████  ██████  ██   ████ ██   ██
-```
+![sona-audio](logo.svg)
 
 **Personal AI audio studio and model benchmark bench.**  
 Transcription · Stem separation · Smart notes · Translation · Music generation.  
@@ -26,15 +20,16 @@ Heavy models run on a GPU box (RTX 3090); logic and the Telegram bot run on a Ma
 | Smart notes | qwen3 via llama-swap | ✅ ready |
 | RU → EN translation | Helsinki-NLP opus-mt (CPU) | ✅ ready |
 | YouTube / SoundCloud download | yt-dlp | ✅ ready |
-| Music generation | ACE-Step-1.5 | ✅ ready |
+| Music generation | ACE-Step-1.5 | 🧪 samples ready · in-repo API WIP |
 | TTS with your own voice | XTTS v2 | 📋 planned |
 
 ---
 
 ## 🎵 Demo — generated music
 
-All tracks below were generated end-to-end by the `/generate` endpoint (ACE-Step-1.5,
-~10 s each on the RTX 3090). Click **download** to grab the `.mp3`.
+All tracks below were generated with **ACE-Step-1.5** on the RTX 3090 (~10 s each).
+They are produced via the ACE-Step ComfyUI node today; wiring this into the in-repo
+`/generate` endpoint is in progress (see [status](#status)). Click **download** to grab the `.mp3`.
 
 | Genre | Waveform | |
 |---|---|---|
@@ -54,6 +49,21 @@ All tracks below were generated end-to-end by the `/generate` endpoint (ACE-Step
 
 > GitHub doesn't play inline audio for files committed to a repo — the links above
 > download the `.mp3`. For inline players, attach files via the GitHub web UI.
+
+---
+
+## Status
+
+What runs through the in-repo API/bot today, and what doesn't yet:
+
+| Path | State |
+|---|---|
+| Transcription · stem separation · smart notes · translation | ✅ working end-to-end (HTTP + Telegram) |
+| Music generation samples (above) | ✅ real ACE-Step output, generated via the ComfyUI node |
+| Music generation through `/generate` → `model_server:/acestep` | 🚧 endpoint is a stub ([`model_server/main.py`](model_server/main.py)); ACE-Step Python API wrapper is the next task |
+| TTS (XTTS v2) | 📋 planned |
+
+This repo is honest about the seam: the **model** is proven (the demo tracks are its output), the **service integration** for generation is the remaining work.
 
 ---
 
@@ -86,7 +96,9 @@ All numbers measured on the GPU box. Lower is better.
 | Whisper large-v3 transcription | 60 s voice (OGG) | ~4 s |
 | Demucs htdemucs stem split | 3 min track (MP3) | ~45 s |
 | qwen3-32k translation | ~200 tokens | ~2 s |
-| ACE-Step music generation | 30–45 s track, turbo | ~10 s |
+| ACE-Step music generation* | 30–45 s track, turbo | ~10 s |
+
+<sub>*measured via the ACE-Step ComfyUI node; the in-repo `/generate` endpoint that wraps it is still being wired up.</sub>
 
 > Benchmark conditions and methodology: [docs/BENCHMARKS.md](docs/BENCHMARKS.md) _(coming soon)_
 
