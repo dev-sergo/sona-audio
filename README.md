@@ -99,12 +99,13 @@ All numbers measured on the GPU box. Lower is better.
 |---|---|---|
 | Whisper large-v3 transcription | 60 s voice (OGG) | ~4 s |
 | Demucs htdemucs stem split | 3 min track (MP3) | ~45 s |
-| qwen3-32k translation | ~200 tokens | ~2 s |
+| gemma-4-26b MoE translation | ~200 tokens | ~2 s |
 | ACE-Step music generation* | 30–45 s track, turbo | ~10 s |
 
 <sub>*measured via the ACE-Step ComfyUI node; the in-repo `/generate` endpoint that wraps it is still being wired up.</sub>
 
-> Benchmark conditions and methodology will be documented separately once the generation timing is measured through the in-repo endpoint.
+> Benchmark conditions, hardware and methodology: [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+> These are indicative single-run figures, not rigorously averaged benchmarks (see the doc).
 
 ---
 

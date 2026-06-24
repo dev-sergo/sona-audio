@@ -91,8 +91,8 @@ Make the demos legible on a platform that can't play them inline.
 The README benchmark table (transcription ~4s, separation ~45s, translation ~2s,
 generation ~10s) is currently asserted with no backing.
 
-- [ ] Create `docs/BENCHMARKS.md`: hardware, exact inputs, how each number was measured, and (after S1) the generation timing.
-- [ ] Link it from the README (replaces the "coming soon" dangling reference from S0).
+- [x] Create `docs/BENCHMARKS.md`: hardware, inputs, reproduction commands. Framed honestly as indicative single-run figures (not rigorous averages — a re-measurement TODO is listed in the doc). Generation row left as _pending S1_.
+- [x] Link it from the README + CONTRIBUTING (replaces the dangling references dropped in S0).
 
 **Payoff:** closes the loop on the "model benchmark bench" framing and makes the numbers credible.
 

@@ -45,8 +45,7 @@ Open a GitHub issue. Include:
 ## Benchmarks
 
 If you run the project on different hardware, consider sharing your numbers by
-opening an issue or PR with the relevant timings. A dedicated benchmark methodology
-doc is planned (see the README benchmark section).
+opening an issue or PR that adds them to [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 ## License
 
