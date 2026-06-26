@@ -14,5 +14,7 @@ async def test_translate_ru_to_en(client):
 
 @pytest.mark.asyncio
 async def test_translate_missing_fields(client):
-    resp = await client.post("/translate", json={"text": "hello"})
+    # 'text' is required; 'target_lang' defaults to "en". Omitting 'text' must fail
+    # schema validation (422) before the route ever calls the LLM.
+    resp = await client.post("/translate", json={"target_lang": "en"})
     assert resp.status_code == 422
