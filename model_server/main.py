@@ -6,7 +6,7 @@ import zipfile
 from contextlib import asynccontextmanager
 
 import torch
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import StreamingResponse
 
 from model_server.config import settings
@@ -156,19 +156,6 @@ async def demucs_separate(file: UploadFile = File(...)):
         headers={"Content-Disposition": "attachment; filename=stems.zip"},
     )
 
-
-# ── acestep (stub) ───────────────────────────────────────────────────────────
-
-@app.post("/acestep")
-async def acestep_generate(
-    lyrics: str = Form(...),
-    style: str = Form(default="pop"),
-    duration_seconds: int = Form(default=30),
-):
-    # TODO: implement after verifying ACE-Step Python API
-    # Weights: settings.acestep_model_path
-    # Reference: ~/Documents/ComfyUI/custom_nodes/ACE-Step-1.5/
-    raise HTTPException(
-        501,
-        detail={"error": "not_implemented", "message": "ACE-Step not implemented yet"},
-    )
+# NOTE: music generation does NOT run through model_server. The /generate flow on
+# the Mac talks to a standalone ACE-Step API server (settings.acestep_url, :8002)
+# via server/services/acestep_service.py — see docs/ARCHITECTURE.md.
