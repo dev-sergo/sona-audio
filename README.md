@@ -9,6 +9,12 @@ Heavy models run on a GPU box (RTX 3090); logic and the Telegram bot run on a Ma
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://opensource.org/)
 
+> **Status: frozen portfolio snapshot (June 2026).** A finished showcase, not an actively
+> developed product. Transcription, stem separation, smart notes and translation work
+> end-to-end (HTTP + Telegram). Music generation is wired in the repo but its backing
+> ACE-Step server isn't deployed here — the 13 demo tracks below are real ACE-Step output.
+> See [Status](#status) for the exact seam.
+
 ---
 
 ## What it does
@@ -64,7 +70,7 @@ What runs through the in-repo API/bot today, and what doesn't yet:
 |---|---|
 | Transcription · stem separation · smart notes · translation | ✅ working end-to-end (HTTP + Telegram) |
 | Music generation samples (above) | ✅ real ACE-Step output, generated via the ComfyUI node |
-| Music generation through `/generate` → `model_server:/acestep` | 🚧 endpoint is a stub ([`model_server/main.py`](model_server/main.py)); ACE-Step Python API wrapper is the next task |
+| Music generation through `/generate` | 🚧 the `/generate` route, job queue and [`acestep_service`](server/services/acestep_service.py) HTTP client are built; they call a standalone **ACE-Step API server** (`ACESTEP_URL`, :8002) that isn't deployed in this snapshot, so generation jobs don't complete |
 | TTS (XTTS v2) | 📋 planned |
 
 This repo is honest about the seam: the **model** is proven (the demo tracks are its output), the **service integration** for generation is the remaining work.

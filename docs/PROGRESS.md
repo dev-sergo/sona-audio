@@ -6,9 +6,13 @@ Living document. Update at the start and end of every dev session.
 
 ## Current Status
 
-**Phase**: 2 — Core stack deployed and tested end-to-end; ACE-Step generation is next
-**Date**: 2026-06-17
-**Next action**: Implement ACE-Step music generation (study ComfyUI node source → wire up model_server endpoint)
+**Phase**: Frozen — portfolio snapshot (2026-06-26)
+**State**: Core stack (transcription · separation · notes · translation) works end-to-end over
+HTTP + Telegram. Music generation is wired on the Mac side (`/generate` → job queue →
+`acestep_service` → standalone ACE-Step API server at `:8002`), but that server is not deployed
+in this snapshot; the 13 demo tracks were produced via the ACE-Step ComfyUI node (same model).
+**If resumed**: launch the standalone ACE-Step API server on `:8002` (from the ACE-Step-1.5
+project) and point `ACESTEP_URL` at it — no in-repo code change needed. See [SHOWCASE_ROADMAP.md](SHOWCASE_ROADMAP.md).
 
 ---
 

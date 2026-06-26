@@ -68,11 +68,12 @@ Poll `GET /jobs/sep_a1b2c3` for result:
 
 Generate a song from lyrics + style.
 
-> ⚠️ **Status: WIP.** This endpoint currently returns **501 Not Implemented** — the
-> downstream `model_server:/acestep` is still a stub. The demo tracks in the README were
-> produced via the ACE-Step ComfyUI node, not this endpoint. See
-> [README → Status](../README.md#status). The request/response shape below is the target
-> contract once the integration lands.
+> ⚠️ **Status: WIP.** The endpoint contract below is real — `/generate` validates the
+> request and enqueues a job. But the job is handled by [`acestep_service`](../server/services/acestep_service.py),
+> an HTTP client for a **standalone ACE-Step API server** (`ACESTEP_URL`, :8002) that
+> isn't deployed in this snapshot, so the job fails at the worker stage. The demo tracks
+> in the README were produced via the ACE-Step ComfyUI node (same model). See
+> [README → Status](../README.md#status).
 
 **Request** — JSON
 ```json

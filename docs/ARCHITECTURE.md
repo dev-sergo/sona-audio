@@ -20,11 +20,13 @@
 │  model_server/   FastAPI :8001      │
 │    POST /whisper  → faster-whisper  │
 │    POST /demucs   → demucs          │
-│    POST /acestep  → ACE-Step (WIP)  │
 │    GET  /health                     │
 │                                     │
 │  llama-swap      :8080 (existing)   │
 │    translation + note summarization │
+│                                     │
+│  ACE-Step API    :8002 (standalone) │
+│    music generation (not deployed)  │
 └─────────────────────────────────────┘
 ```
 
@@ -46,7 +48,7 @@
 ```
 sona-audio/
 ├── model_server/               ← runs on GPU box
-│   ├── main.py                 # FastAPI: /whisper /demucs /acestep /health
+│   ├── main.py                 # FastAPI: /whisper /demucs /health
 │   └── config.py               # model paths, device settings
 │
 ├── server/                     ← runs on Mac
@@ -65,7 +67,7 @@ sona-audio/
 │   └── services/               # HTTP clients → GPU box
 │       ├── whisper_service.py  # calls model_server /whisper
 │       ├── demucs_service.py   # calls model_server /demucs, extracts ZIP
-│       ├── acestep_service.py  # calls model_server /acestep
+│       ├── acestep_service.py  # HTTP client → standalone ACE-Step API server (:8002)
 │       └── llm_service.py      # calls llama-swap /v1/chat/completions
 │
 ├── bot/                        ← runs on Mac
@@ -93,7 +95,7 @@ sona-audio/
 |---|---|---|
 | Model server location | GPU box | Models need CUDA; Mac has no GPU |
 | Business logic location | Mac | Keeps GPU box minimal and stateless |
-| ACE-Step integration | Direct Python API | No ComfyUI dependency at runtime |
+| ACE-Step integration | Standalone ACE-Step API server (HTTP, :8002) | Reuses ACE-Step's own `api_server`; no ComfyUI dependency at runtime |
 | Translation | llama-swap (qwen3) | Already running, no extra VRAM |
 | Storage | SQLite on Mac | Simple, no server needed |
 | Bot | Mac, stateless | Connects to server via API_URL env var |
@@ -104,7 +106,7 @@ sona-audio/
 |---|---|---|
 | faster-whisper large-v3 | ~3 GB | loaded at startup |
 | demucs htdemucs | ~1 GB | loaded at startup |
-| ACE-Step (API WIP) | ~8-10 GB | lazy load (weights present; `/acestep` returns 501 until wired up) |
+| ACE-Step (standalone :8002) | ~8-10 GB | runs in its own ACE-Step API server process; not deployed in this snapshot |
 | llama-swap (qwen3) | ~6-8 GB | managed separately |
 
 Whisper + Demucs + llama-swap ≈ 12 GB simultaneous → fits in 24 GB.

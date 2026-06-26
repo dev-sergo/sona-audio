@@ -50,8 +50,9 @@ curl -O http://localhost:8000/audio/sep_xxxx/vocals.wav
 ```
 
 ### 6. Music generation 🚧
-> Currently returns **501** — `model_server:/acestep` is still a stub (roadmap S1).
-> The commands below are the target contract once the endpoint is wired up.
+> `/generate` enqueues a job, but the job needs the standalone **ACE-Step API server**
+> on `:8002` (`ACESTEP_URL`), which isn't deployed in this snapshot — so the job fails.
+> The commands below are the real contract; they complete once that server is running.
 ```bash
 curl -X POST http://localhost:8000/generate \
   -H "Content-Type: application/json" \

@@ -5,16 +5,24 @@
 > Status legend: `[ ]` todo · `[~]` in progress · `[x]` done.
 > Tags: **(no-GPU)** doable on the Mac · **(GPU)** needs the RTX 3090 GPU box.
 
-Created 2026-06-24.
+Created 2026-06-24. **Frozen 2026-06-26** as a portfolio snapshot.
+
+> **This project is frozen as a portfolio piece.** S0 (hygiene), S2 (spectrograms) and
+> S3 (benchmark doc) are done; the ACE-Step code/docs were reconciled to one coherent
+> design (the dead `model_server` stub was removed). **S1 (actually running generation) is
+> intentionally deferred** — the model is already proven by the 13 demo tracks, so wiring the
+> last HTTP hop adds little showcase value relative to the cost. The list below is kept as a
+> record of what "fully finished" would mean if the project is ever resumed.
 
 ---
 
 ## Where this project stands
 
 The architecture (Mac ↔ GPU-box split), transcription, separation, notes and translation
-all work end-to-end. The **music-generation pipeline does not** — `/acestep` is a 501 stub;
-the 13 demo tracks were made directly in ComfyUI. The README is now honest about this, but
-**internal docs still contradict it**, and there's repo hygiene to clean up.
+all work end-to-end. **Music generation** is wired on the Mac side (`/generate` → job queue →
+`acestep_service` → standalone ACE-Step API server at `:8002`) but that server isn't deployed
+in this snapshot; the 13 demo tracks were made via the ACE-Step ComfyUI node (same model).
+Code and docs now tell one consistent story about this seam.
 
 Audio is also harder to show off than images: GitHub won't play inline audio, and audio gen
 has fewer "knobs" than image/video — the quality levers are mostly **model + lyrics/style
@@ -40,7 +48,7 @@ From the 2026-06-24 audit. Fixes a privacy leak, a broken link, stale URLs, and 
 internal docs with the now-honest README.
 
 **Hygiene / blockers:**
-- [x] `.env.example:28` — leaked personal username **and** hardcoded a ComfyUI-specific path → replaced with `<path-to-ace-step-models>` placeholder; `model_server/config.py:12` default emptied (must be set via `ACESTEP_MODEL_PATH`; no `~` expansion in pydantic). Also: `Makefile` venv path → overridable `VENV ?=` var; stale `server/config.py` `llm_model` default → real gemma model.
+- [x] `.env.example:28` — leaked personal username **and** hardcoded a ComfyUI-specific path. (S0 swapped it for a placeholder; the later freeze cleanup **removed `ACESTEP_MODEL_PATH` / `acestep_model_path` entirely** — they belonged to the deleted `model_server` ACE-Step stub, not the real `:8002` design.) Also: `Makefile` venv path → overridable `VENV ?=` var; stale `server/config.py` `llm_model` default → real gemma model.
 - [x] Stale repo URL with trailing dash `sona-audio-` (canonical is now `sona-audio`): fixed README `:8` (CI badge), `:111`, `:119` and CONTRIBUTING `:19`. Ran `git remote set-url origin https://github.com/dev-sergo/sona-audio.git`.
 - [x] `docs/BENCHMARKS.md` linked "coming soon" but doesn't exist → **dropped** the dangling links (README + CONTRIBUTING); S3 recreates the doc and re-adds them.
 
@@ -56,19 +64,23 @@ internal docs with the now-honest README.
 
 ---
 
-## S1 — Finish ACE-Step integration (GPU) — *the core blocker*
+## S1 — Run music generation end-to-end (GPU) — *deferred, out of scope for the freeze*
 
-Until this works, the project is a benchmark stand, not a music studio. This is the one
-session that changes the project's identity.
+The Mac-side integration is already built: `/generate` → job queue → `acestep_service`
+(HTTP client) → standalone **ACE-Step API server** (`ACESTEP_URL`, :8002, `/release_task`
++ `/query_result`). The only missing piece is **running that server** — no in-repo code
+change is needed. (Earlier drafts of this plan described implementing `/acestep` inside
+`model_server`; that was a superseded design and its dead stub has been removed.)
 
-- [ ] Study the kijai ACE-Step node / Python API (reference in `model_server/main.py:168-170`).
-- [ ] Implement `/acestep` in `model_server/main.py` (replace the 501 stub): load weights from `settings.acestep_model_path`, lazy-load when VRAM > threshold, return audio.
-- [ ] Confirm `server/services/acestep_service.py` → `/acestep` round-trips, and `/generate` → job queue → result works end-to-end.
-- [ ] Test via curl and via the Telegram `/generate` wizard.
-- [ ] Document seed/determinism behaviour (can a demo be regenerated exactly?).
-- [ ] Flip the README **Status** table + feature table from `🧪 API WIP` to `✅ working`, and update the benchmark footnote.
+If resumed, the shortest path:
+- [ ] On the GPU box, launch the ACE-Step API server on `:8002` from the ACE-Step-1.5 project. No `conda` here, so run it from an env with the deps (e.g. ComfyUI's, where ACE-Step already works) rather than the standalone `run_api_server.sh` (which assumes conda + binds :8001).
+- [ ] Point `ACESTEP_URL` at it; run `/generate` end-to-end (curl + the Telegram wizard).
+- [ ] Document seed/determinism (can a demo be regenerated exactly?).
+- [ ] Only after a real run: flip the README **Status** + feature table to `✅ working`, add the generation row to [BENCHMARKS.md](BENCHMARKS.md), and update the frozen banner.
 
-**Payoff:** delivers on the headline promise; turns sona into a real third showcase pillar.
+**Why deferred:** the model is already proven by the 13 demo tracks; running the last HTTP
+hop is real-but-low-leverage work for a frozen showcase, and carries setup risk (port
+conflict with `model_server`, VRAM juggling with resident Whisper/Demucs/llama-swap).
 
 ---
 

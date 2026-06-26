@@ -38,9 +38,9 @@ the figures below are **inference time on the GPU box** and exclude Mac↔box ne
 | Music generation | ACE-Step-1.5 turbo | 30–45 s track | _pending S1_ |
 
 <sub>**Generation:** the ~10 s figure quoted historically was measured via the ACE-Step
-**ComfyUI node**, not the in-repo `/generate` endpoint (which is still a 501 stub — see
-[README → Status](../README.md#status)). It will be measured here once the endpoint is
-wired up (roadmap S1).</sub>
+**ComfyUI node**, not the in-repo `/generate` flow — whose backing standalone ACE-Step
+API server (`ACESTEP_URL`, :8002) isn't deployed in this snapshot (see
+[README → Status](../README.md#status)). It will be measured here once that server runs.</sub>
 
 Notes:
 - **Whisper** and **demucs** are loaded persistently at startup, so the times above are
